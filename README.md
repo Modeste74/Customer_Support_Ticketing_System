@@ -1,8 +1,7 @@
-<h1><span>🎫</span> Ticket System Frontend</h1>
+<h1><span class="emoji">🎫</span> Ticket System Frontend</h1>
 <p>A modern, responsive frontend application for a simple ticket management system, built with React and TypeScript. This application allows users to register, log in, create new tickets, and view their submitted tickets.</p>
 
 <h2><span>✨</span> Features</h2>
-
 <ul>
     <li><strong>User Authentication:</strong>
         <ul>
@@ -48,55 +47,82 @@
 <ul>
     <li><a href="https://nodejs.org/en/">Node.js</a> (LTS version recommended)</li>
     <li>npm or Yarn (package manager)</li>
+    <li>MongoDB (if your backend uses it, e.g., for a MERN stack)</li>
 </ul>
 
 <h2><span>🛠️</span> Getting Started</h2>
 <p>Follow these steps to get the project up and running on your local machine.</p>
 
 <h3>1. Clone the repository</h3>
-<pre><code>git clone &lt;your-repository-url&gt;
-cd &lt;your-project-folder&gt; # e.g., cd ticket-system-frontend</code></pre>
+<p>Clone the main project repository that contains both <code>client</code> and <code>server</code> folders:</p>
 
-<h3>2. Install Dependencies</h3>
+<pre><code>git clone &lt;your-repository-url&gt;
+cd &lt;your-project-folder&gt; # e.g., cd ticket-system-fullstack</code></pre>
+
+<h3>2. Frontend Setup (Client)</h3>
+<p>Navigate into the <code>client</code> directory to set up the frontend application:</p>
+<pre><code>cd client</code></pre>
+
+<h4>2.1. Install Frontend Dependencies</h4>
 <p>Using npm:</p>
 <pre><code>npm install</code></pre>
 
 <p>Or using Yarn:</p>
 <pre><code>yarn install</code></pre>
 
-<h3>3. Environment Variables</h3>
-
-<p>Create a <code>.env.development</code> file in the root of your project (<code>client/</code> folder if it's within a monorepo) and add your backend API base URL:</p>
-
-<pre><code># .env.development
+<h4>2.2. Environment Variables (Frontend)</h4>
+<p>Create a <code>.env.development</code> file in the root of your frontend project (i.e., inside the <code>client/</code> folder) and add your backend API base URL:</p>
+<pre><code># client/.env.development
 VITE_API_BASE_URL=http://localhost:5000/api</code></pre>
 
 <blockquote>
     <p><strong>Note:</strong> For production deployment, you would create a <code>.env.production</code> file with your production backend API URL (e.g., <code>https://your-production-backend.com/api</code>).</p>
 </blockquote>
 
-<h3>4. Run the Development Server</h3>
-<p>Using npm:</p>
-
+<h4>2.3. Run the Frontend Development Server</h4>
+<p>From within the <code>client/</code> directory, run the development server:</p>
 <pre><code>npm run dev</code></pre>
+
 <p>Or using Yarn:</p>
-
 <pre><code>yarn dev</code></pre>
-<p>The application will typically be accessible at <code>http://localhost:5173</code> (or another port if 5173 is in use).</p>
 
-<h3>5. Backend Integration</h3>
-<p>This frontend application requires a corresponding backend API to function correctly. Ensure your backend is running and accessible at the <code>VITE_API_BASE_URL</code> you configured.</p>
+<p>The frontend application will typically be accessible at <code>http://localhost:5173</code> (or another port if 5173 is in use).</p>
 
-<p>Expected backend endpoints:</p>
-<ul>
-    <li><code>POST /api/auth/register</code></li>
-    <li><code>POST /api/auth/login</code></li>
-    <li><code>POST /api/tickets</code></li>
-    <li><code>GET /api/tickets</code></li>
-    <li><code>GET /api/tickets/:id</code> (for future ticket detail pages)</li>
-</ul>
+<h3>3. Backend Setup (Server)</h3>
+<p>Open a new terminal window or tab, and navigate into the <code>server</code> directory to set up the backend API:</p>
+<pre><code>cd ../server</code></pre>
+
+<h4>3.1. Install Backend Dependencies</h4>
+<p>From within the <code>server/</code> directory, install its dependencies (e.g., for a Node.js project):</p>
+<pre><code>npm install
+# or yarn install</code></pre>
+
+<h4>3.2. Environment Variables (Backend)</h4>
+<p>Create a <code>.env</code> file in the root of your backend project (i.e., inside the <code>server/</code> folder) and configure the necessary environment variables, such as the port, database connection string, and JWT secret. Adjust these according to your backend's specific requirements.</p>
+
+<pre><code># server/.env
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/ticketdb
+JWT_SECRET=your_jwt_secret_key_here
+</code></pre>
+
+<h4>3.3. Run the Backend Server</h4>
+<p>From within the <code>server/</code> directory, start the server. This command may vary based on your backend framework (e.g., for a Node.js/Express app):</p>
+
+<pre><code>npm start
+# or node server.js
+# or npm run dev (if you have a dev script with nodemon)
+</code></pre>
+<p>Ensure the backend is running on the port configured in its <code>.env</code> file (e.g., <code>5000</code>), as this needs to match the port used in your frontend's <code>VITE_API_BASE_URL</code>.</p>
 
 <h2><span>📁</span> Project Structure (Key Files)</h2>
+<h3>Overall Repository Structure</h3>
+<ul>
+    <li><code>client/</code>: Contains all frontend application code.</li>
+    <li><code>server/</code>: Contains all backend API code.</li>
+</ul>
+
+<h3>Frontend Structure (<code>client/</code>)</h3>
 <ul>
     <li><code>src/App.tsx</code>: Main application component, handles routing.</li>
     <li><code>src/api/axios.ts</code>: Centralized Axios instance for API calls.</li>
@@ -107,4 +133,14 @@ VITE_API_BASE_URL=http://localhost:5000/api</code></pre>
     <li><code>src/pages/LoginPage.tsx</code>: User login form.</li>
     <li><code>src/pages/NewTicketPage.tsx</code>: Form for creating new tickets.</li>
     <li><code>src/pages/Dashboard.tsx</code>: Displays a list of user's tickets.</li>
+</ul>
+
+<h3>Backend Structure (<code>server/</code> - Example)</h3>
+<p>This is a hypothetical example; your actual backend structure may differ.</p>
+<ul>
+    <li><code>server.js</code> or <code>app.js</code>: Main entry point.</li>
+    <li><code>routes/</code>: Defines API endpoints (e.g., <code>authRoutes.js</code>, <code>ticketRoutes.js</code>).</li>
+    <li><code>models/</code>: Defines database schemas (e.g., <code>User.js</code>, <code>Ticket.js</code>).</li>
+    <li><code>config/</code>: Database connection setup.</li>
+    <li><code>middleware/</code>: Authentication middleware (e.g., <code>authMiddleware.js</code>).</li>
 </ul>
